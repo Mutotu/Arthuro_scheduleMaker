@@ -1,80 +1,47 @@
-// import React, { useState } from 'react';
-// import { employees } from './data';
+import React from 'react';
 
-// function ShiftTable() {
-//   const currentDate = new Date();
-//   const numDays = 7;
-//   const dates = [...Array(numDays)].map((_, index) => {
-//     const date = new Date();
-//     date.setDate(currentDate.getDate() + index);
-//     return date;
-//   });
+function ShiftTable({ schedule }) {
+  const days = Object.keys(schedule);
+  const shifts = ["0600-1400", "1400-2200", "2200-0600"];
 
-//   const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-//   const shifts = ['0600-1400', '1400-2200', '2200-0600'];
-//   const initialShiftData = shifts.map(() => Array(numDays).fill(''));
-//   const [shiftData, setShiftData] = useState(initialShiftData);
-//   const [scheduleGenerated, setScheduleGenerated] = useState(false);
+  const currentDate = new Date();
 
-//   const addNewShift = (shiftIndex, dayIndex, newData) => {
-//     const updatedShiftData = [...shiftData];
-//     updatedShiftData[shiftIndex][dayIndex] = newData;
-//     setShiftData(updatedShiftData);
-//     console.log(shiftData)
-//   };
+  // Calculate the date for each day of the week
+  const dateLabels = days.map((day, index) => {
+    const dayOffset = (index - currentDate.getDay() + 7) % 7;
+    const date = new Date(currentDate);
+    date.setDate(currentDate.getDate() + dayOffset);
+    const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
+    return formattedDate;
+  });
 
-//   const generateSchedule = () => {
-//     const newShiftData = [...shiftData];
+  return (
+    <div className="shift-table">
+      <h2>Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            {days.map((day, index) => (
+              <th key={day}>
+                {day} <br /> {dateLabels[index]}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {shifts.map(shift => (
+            <tr key={shift}>
+              <td>{shift}</td>
+              {days.map(day => (
+                <td key={`${day}-${shift}`}>{schedule[day][shift].length === 0 ? <input value={"temp"} /> : schedule[day][shift]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-//     data.employees
-//       .filter((employee) => Object.keys(employee.availability).length === 7) // Filter employees with 5 shifts
-//       .forEach((employee) => {
-//         shifts.forEach((shift, shiftIndex) => {
-//           dates.forEach((date, dayIndex) => {
-//             newShiftData[shiftIndex][dayIndex] = employee.name;
-//           });
-//         });
-//       });
-
-//     setShiftData(newShiftData);
-//     setScheduleGenerated(true);
-//   };
-
-//   return (
-//     <div>
-//       <table className="shift-table">
-//         <thead>
-//           <tr>
-//             <th></th>
-//             {dates.map((date, index) => (
-//               <th key={index}>
-//                 {weekdays[date.getDay()]}<br />
-//                 {date.toLocaleDateString()}
-//               </th>
-//             ))}
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {shifts.map((shift, shiftIndex) => (
-//             <tr key={shiftIndex}>
-//               <td>{shift}</td>
-//               {dates.map((date, dayIndex) => (
-//                 <td key={dayIndex}>
-//                   <input
-//                     type="text"
-//                     value={shiftData[shiftIndex][dayIndex]}
-//                     onChange={(e) => addNewShift(shiftIndex, dayIndex, e.target.value)}
-//                   />
-//                 </td>
-//               ))}
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//       <button onClick={generateSchedule}>Generate schedule</button>
-//       {scheduleGenerated && <p>Schedule generated.</p>}
-//     </div>
-//   );
-// }
-
-// // export default ShiftTable;
+export default ShiftTable;
