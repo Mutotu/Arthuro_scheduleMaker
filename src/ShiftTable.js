@@ -1,4 +1,5 @@
 import React from 'react';
+import saveScheduleToCSV from "./csvWriter"
 
 function ShiftTable({ schedule }) {
   const days = Object.keys(schedule);
@@ -15,6 +16,9 @@ function ShiftTable({ schedule }) {
     return formattedDate;
   });
 
+  const handleClick = () => {
+    saveScheduleToCSV(schedule)
+  }
   return (
     <div className="shift-table">
       <h2>Schedule</h2>
@@ -40,6 +44,7 @@ function ShiftTable({ schedule }) {
           ))}
         </tbody>
       </table>
+      <button onClick={handleClick}>Save to csv</button>
     </div>
   );
 }
