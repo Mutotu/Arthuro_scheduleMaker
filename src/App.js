@@ -8,6 +8,12 @@ function App() {
   const [offTimesData, setOffTimesData] = useState(employees)
   const [schedule, setSchedule] = useState(null)
 
+  const handleChangeShift = (e, day, shift) => {
+    console.log(e.target.value)
+    setSchedule(pre => ({ ...pre, [day]: { ...pre[day], [shift]: e.target.value } }))
+    // 
+  }
+
 
   const handleChange = (employeeId, day, i) => {
     i = i[0]
@@ -64,8 +70,8 @@ function App() {
       };
     }
 
-    const maxShiftsPerEmployee = 5; // Maximum number of shifts per employee
-    const minHoursBetweenShifts = 12; // Minimum hours between shifts
+    const maxShiftsPerEmployee = 5;
+    const minHoursBetweenShifts = 12;
     const employeesShiftCount = {};
     const employeesLastShift = {};
 
@@ -120,7 +126,7 @@ function App() {
         ))}
         <button type="submit" className="submit-button">Ready</button>
       </form>
-      {schedule && <ShiftTable schedule={schedule} />}
+      {schedule && <ShiftTable schedule={schedule} handleChangeShift={handleChangeShift} />}
     </div>
   );
 }
