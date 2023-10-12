@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Arthuro_scheduleMaker/static/css/main.9665d93d.css",
-    "main.js": "/Arthuro_scheduleMaker/static/js/main.40ef85f9.js",
+    "main.css": "/Arthuro_scheduleMaker/static/css/main.c3b44e9c.css",
+    "main.js": "/Arthuro_scheduleMaker/static/js/main.ffec87fd.js",
     "index.html": "/Arthuro_scheduleMaker/index.html",
-    "main.9665d93d.css.map": "/Arthuro_scheduleMaker/static/css/main.9665d93d.css.map",
-    "main.40ef85f9.js.map": "/Arthuro_scheduleMaker/static/js/main.40ef85f9.js.map"
+    "main.c3b44e9c.css.map": "/Arthuro_scheduleMaker/static/css/main.c3b44e9c.css.map",
+    "main.ffec87fd.js.map": "/Arthuro_scheduleMaker/static/js/main.ffec87fd.js.map"
   },
   "entrypoints": [
-    "static/css/main.9665d93d.css",
-    "static/js/main.40ef85f9.js"
+    "static/css/main.c3b44e9c.css",
+    "static/js/main.ffec87fd.js"
   ]
 }
