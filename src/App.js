@@ -11,7 +11,7 @@ function App() {
   const handleChangeShift = (e, day, shift) => {
     console.log(e.target.value)
     setSchedule(pre => ({ ...pre, [day]: { ...pre[day], [shift]: e.target.value } }))
-    // 
+    
   }
 
 
